@@ -1,26 +1,31 @@
 <?php
-// +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2006-2014 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: liu21st <liu21st@gmail.com>
-// +----------------------------------------------------------------------
 
-// 应用入口文件
+/* 开启调试模式 */
+define("APP_DEBUG", TRUE);
 
-// 检测PHP环境
-if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
+/* 项目名称，不可更改 */
+define('APP_NAME', 'ThinkCMF');
 
-// 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false
-define('APP_DEBUG',True);
+/* 定义应该根目录 */
+define('CMF_ROOT', getcwd());
 
-// 定义应用目录
-define('APP_PATH','./Application/');
+/* 数据写入目录 */
+define('CMF_DATA', CMF_ROOT . '/static/data');
 
-// 引入ThinkPHP入口文件
+/* 项目路径，不可更改 */
+define('APP_PATH', CMF_ROOT . '/' . APP_NAME . '/');
+
+
+/* 定义缓存存放路径 */
+define("RUNTIME_PATH", CMF_DATA . '/.runtime/');
+
+/* 检测系统是否需要安装 */
+if (!file_exists("./static/data/install.lock")) {
+	$_GET['m'] = 'install';
+}
+
+/* 版本号 */
+define("CMF_VERSION", 'Extend 1.0');
+
+//载入框架核心文件
 require './ThinkPHP/ThinkPHP.php';
-
-// 亲^_^ 后面不需要任何代码了 就是如此简单
